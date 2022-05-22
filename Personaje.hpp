@@ -64,7 +64,7 @@ namespace bblProgIIB
             void asignarOro(const double mor);
 
             // Establece los objetos que posee el personaje
-            void asignarBolsa(const Bolsa &bolsa);
+            void asignarBolsa(const Bolsa &bols);
 
             // Muestra el nombre del personaje.
             std::string mostrarNombre() const;
