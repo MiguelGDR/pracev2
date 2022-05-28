@@ -49,7 +49,8 @@ Personaje::Personaje(const Personaje &Otro_personaje)
 
 Personaje::~Personaje()
 {
-    delete bolsa;
+    cout << "Personaje eliminado." << endl;
+    cout << endl;
 }
 
 // Métodos públicos
@@ -152,6 +153,19 @@ double Personaje::mostrarOro() const
 
 void Personaje::mostrarBolsa() const
 {
+    Bolsa ptr;
+    ptr = bolsa;
+
+    while (ptr != nullptr)
+    {
+        cout << "Nombre: " << ptr->nombre << endl;
+        cout << "Tipo: " << ptr->tipo << endl;
+        cout << "Valor: " << ptr->valor << endl;
+        cout << "Cantidad: " << ptr->cantidad << endl;
+        cout << endl;
+
+        ptr = ptr->sig;
+    }
     return;
 }
 
@@ -161,19 +175,59 @@ void Personaje::crearBolsa()
     bolsa = nullptr;
 }
 
+unsigned Personaje::numobjBolsa()
+{
+    Bolsa ptr = bolsa;
+    unsigned i = 0;
+    while (ptr != nullptr)
+    {
+        ptr = ptr->sig;
+        i += 1;
+    }
+    return i;
+}
+
 void Personaje::entregarBolsa(Bolsa &bolsac)
 {
     bolsac = bolsa;
     borrar_bolsa(bolsa);
 }
 
-// Métodos privados
-/*
-void Personaje::buscar_objeto(const std::string nombre, Bolsa &pos, Bolsa &ant) const
+void Personaje::insertar_objeto(Objeto &objeto)
 {
-
+    insertar_ordenado(objeto);
 }
-*/
+
+void Personaje::eliminar_objeto(Objeto &objeto)
+{
+    eliminar_ordenado(objeto.nombre);
+}
+
+// Métodos privados
+
+/*void Personaje::buscar_objeto(const std::string nombre, Bolsa &pos, Bolsa &ant) const
+{
+    bool done = 0;
+    if (bolsa == nullptr)
+    {
+        done = 1;
+    }
+    else if (bolsa->sig == nullptr)
+    {
+        if (bolsa->nombre < nombre)
+        {
+            pos = bolsa->sig;
+        }
+        else if (bolsa->nombre == nombre)
+        {
+            pos = bolsa;
+        }
+    }
+    else
+    {
+
+    }
+}*/
 
 void Personaje::insertar_ordenado(Objeto &objeto)
 {
@@ -182,9 +236,9 @@ void Personaje::insertar_ordenado(Objeto &objeto)
     nuevo_obj->tipo = objeto.tipo;
     nuevo_obj->valor = objeto.valor;
     nuevo_obj->cantidad = objeto.cantidad;
-    nuevo_obj->sig = objeto.sig;
+    nuevo_obj->sig = nullptr;
 
-    if (bolsa == nullptr || bolsa->nombre > nuevo_obj->nombre)
+    if (bolsa == nullptr)
     {
         nuevo_obj->sig = bolsa;
         bolsa = nuevo_obj;
@@ -193,7 +247,7 @@ void Personaje::insertar_ordenado(Objeto &objeto)
     {
         bool done = false;
         ptr = bolsa;
-        while (ptr != nullptr)
+        while (ptr != nullptr && !done)
         {
             if (ptr->nombre > nuevo_obj->nombre)
             {
@@ -201,12 +255,18 @@ void Personaje::insertar_ordenado(Objeto &objeto)
                 ptr = nuevo_obj;
                 done = true;
             }
+            else if(ptr->nombre == nuevo_obj->nombre)
+            {
+                ptr->cantidad += objeto.cantidad;
+                done = true;
+            }
             ptr = ptr->sig;
         }
-        if (false)  // ptr == nullptr
+        if (!done) // ptr == nullptr
         {
-            nuevo_obj->sig = nullptr;
+            cout << "Entra final?" << endl;
             ptr = nuevo_obj;
+            system("pause");
         }
     }
 }

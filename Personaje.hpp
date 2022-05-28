@@ -99,6 +99,9 @@ namespace bblProgIIB
             // Crea la bolsa del personaje;
             void crearBolsa();
 
+            // Número de elementos en la bolsa
+            unsigned numobjBolsa();
+
             //Copia la bolsa del personaje y la devuelve en bolsac, dejando vacia la bolsa del personaje
             void entregarBolsa(Bolsa &bolsac);
 
