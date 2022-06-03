@@ -34,7 +34,7 @@ char menu()
 int main()
 {
     char op;
-    Personaje pers;
+    Personaje pers, pers2;
 
     while ((op = menu()) != '0')
     {
@@ -193,6 +193,12 @@ int main()
             cout << endl;
             system("pause");
             break;
+        }
+
+        case '9':
+        {
+            system("cls");
+            
         }
         }
     }

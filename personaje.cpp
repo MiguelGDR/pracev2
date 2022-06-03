@@ -5,7 +5,7 @@
 using namespace std;
 using namespace bblProgIIB;
 
-// Constructores y destructor
+// Constructores y destructor --------------------------------------------
 Personaje::Personaje()
 {
     nombre = "";
@@ -33,9 +33,9 @@ Personaje::Personaje(std::string nnombre, std::string nraza, std::string ncaract
     bolsa = nbolsa;
 }
 
-Personaje::Personaje(const Personaje &Otro_personaje)
+Personaje::Personaje(const Personaje &Otro_personaje) // Para copiar solo bolsa?
 {
-    nombre = Otro_personaje.nombre;
+    /*nombre = Otro_personaje.nombre;
     raza = Otro_personaje.raza;
     caracter = Otro_personaje.caracter;
     sexo = Otro_personaje.sexo;
@@ -43,7 +43,7 @@ Personaje::Personaje(const Personaje &Otro_personaje)
     pfuerza = Otro_personaje.pfuerza;
     pdestreza = Otro_personaje.pdestreza;
     pmagia = Otro_personaje.pmagia;
-    oro = Otro_personaje.oro;
+    oro = Otro_personaje.oro; */
     bolsa = Otro_personaje.bolsa;
 }
 
@@ -53,8 +53,8 @@ Personaje::~Personaje()
     cout << endl;
 }
 
-// Métodos públicos
-// ASIGNAR
+// Métodos públicos -----------------------------------------------------------
+// ASIGNAR --------------------------------------------------------------------
 void Personaje::asignarNombre(const std::string nomb)
 {
     nombre = nomb;
@@ -105,7 +105,7 @@ void Personaje::asignarBolsa(const Bolsa &bols)
     bolsa = bols;
 }
 
-// MOSTRAR
+// MOSTRAR -------------------------------------------------------------
 std::string Personaje::mostrarNombre() const
 {
     return nombre;
@@ -169,7 +169,7 @@ void Personaje::mostrarBolsa() const
     return;
 }
 
-// Metodos para uso de la bolsa (lista)
+// Metodos para uso de la bolsa (lista) --------------------------------------
 void Personaje::crearBolsa()
 {
     bolsa = nullptr;
@@ -203,7 +203,43 @@ void Personaje::eliminar_objeto(Objeto &objeto)
     eliminar_ordenado(objeto.nombre);
 }
 
-// Métodos privados
+// Operadores sobrecargados --------------------------------------------
+
+Personaje &Personaje::operator=(const Personaje &otro)
+{
+    this->nombre = otro.nombre;
+    this->raza = otro.raza;
+    this->caracter = otro.caracter;
+    this->sexo = otro.sexo;
+    this->pvida = otro.pvida;
+    this->pfuerza = otro.pfuerza;
+    this->pdestreza = otro.pdestreza;
+    this->pmagia = otro.pmagia;
+    this->oro = otro.oro;
+    this->bolsa = otro.bolsa;
+
+    return *this; // Devuelvo el puntero que apunta al objeto personaje copiado
+}
+
+bool Personaje::operator==(const Personaje &otro) const
+{
+    bool ok = true;
+    if (this->nombre != otro.nombre || this->raza != otro.raza || this->caracter != otro.caracter || this->sexo != otro.sexo)
+    {
+        ok = false;
+    }
+    else if (this->pvida != otro.pvida || this->pfuerza != otro.pfuerza || this->pdestreza != otro.pdestreza || this->pmagia != otro.pmagia)
+    {
+        ok = false;
+    }
+    else if (this->oro != otro.oro || this->bolsa != otro.bolsa)
+    {
+        ok = false;
+    }
+    return ok;
+}
+
+// Métodos privados ----------------------------------------------------
 
 /*void Personaje::buscar_objeto(const std::string nombre, Bolsa &pos, Bolsa &ant) const
 {
@@ -232,40 +268,44 @@ void Personaje::eliminar_objeto(Objeto &objeto)
 void Personaje::insertar_ordenado(Objeto &objeto)
 {
     Bolsa ptr, nuevo_obj = new Objeto;
+
     nuevo_obj->nombre = objeto.nombre;
     nuevo_obj->tipo = objeto.tipo;
     nuevo_obj->valor = objeto.valor;
     nuevo_obj->cantidad = objeto.cantidad;
-    nuevo_obj->sig = nullptr;
 
-    if (bolsa == nullptr)
+    if (bolsa == nullptr || bolsa->nombre > nuevo_obj->nombre)
     {
         nuevo_obj->sig = bolsa;
         bolsa = nuevo_obj;
+
+        system("pause");
     }
     else
     {
         bool done = false;
         ptr = bolsa;
-        while (ptr != nullptr && !done)
+
+        while ((ptr->sig != nullptr) && (ptr->sig->nombre < nuevo_obj->nombre))
         {
-            if (ptr->nombre > nuevo_obj->nombre)
-            {
-                nuevo_obj->sig = ptr;
-                ptr = nuevo_obj;
-                done = true;
-            }
-            else if(ptr->nombre == nuevo_obj->nombre)
-            {
-                ptr->cantidad += objeto.cantidad;
-                done = true;
-            }
             ptr = ptr->sig;
         }
-        if (!done) // ptr == nullptr
+        if (ptr->sig == nullptr)
         {
-            cout << "Entra final?" << endl;
-            ptr = nuevo_obj;
+            nuevo_obj->sig = ptr->sig;
+            ptr->sig = nuevo_obj;
+
+            done = true;
+
+            cout << endl;
+            system("pause");
+        }
+        if (!done)
+        {
+            nuevo_obj->sig = ptr->sig;
+            ptr->sig = nuevo_obj;
+
+            cout << endl;
             system("pause");
         }
     }
