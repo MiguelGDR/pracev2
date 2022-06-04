@@ -153,14 +153,13 @@ double Personaje::mostrarOro() const
 
 void Personaje::mostrarBolsa() const
 {
-    Bolsa ptr;
-    ptr = bolsa;
+    Bolsa ptr = bolsa;
 
     while (ptr != nullptr)
     {
-        cout << "Nombre: " << ptr->nombre << endl;
-        cout << "Tipo: " << ptr->tipo << endl;
-        cout << "Valor: " << ptr->valor << endl;
+        cout << "Nombre:   " << ptr->nombre << endl;
+        cout << "Tipo:     " << ptr->tipo << endl;
+        cout << "Valor:    " << ptr->valor << endl;
         cout << "Cantidad: " << ptr->cantidad << endl;
         cout << endl;
 
