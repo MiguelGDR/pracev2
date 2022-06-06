@@ -32,12 +32,12 @@ namespace bblProgIIB
 	public:
 		Banda();
 		// Constructor por defecto
-		Banda(const Lista &Otra_banda);
+		Banda(const Banda &Otra_banda);
 		// Constructor de copia
 		~Banda();
 		// Destructor
 
-		void crear_Banda(Lista &banda);
+		void crear_Banda();
 		// Crea la banda de personajes vacia;
 		// -------------------------------------
 		void insertar_personaje(const Personaje &personaje);
@@ -53,7 +53,7 @@ namespace bblProgIIB
 		unsigned integrantes_Banda() const;
 		// Muestra el número total de integrantes de la banda
 		// -------------------------------------
-		void mostrar_Banda(const Lista &bandal) const;
+		void mostrar_Banda() const;
 		// Muestra por pantalla todos los miembros de la banda y sus atributos, incluida la bolsa
 		// -------------------------------------
 		void leer_de_fichero(const std::string &nom_fic, bool &leido);
