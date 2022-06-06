@@ -49,7 +49,7 @@ Personaje::Personaje(const Personaje &Otro_personaje) // Para copiar solo bolsa?
 
 Personaje::~Personaje()
 {
-    cout << "Personaje eliminado." << endl;
+    cout << "Personaje eliminado con exito." << endl;
     cout << endl;
 }
 
@@ -154,7 +154,6 @@ double Personaje::mostrarOro() const
 void Personaje::mostrarBolsa() const
 {
     Bolsa ptr = bolsa;
-
     while (ptr != nullptr)
     {
         cout << "Nombre:   " << ptr->nombre << endl;
@@ -166,6 +165,11 @@ void Personaje::mostrarBolsa() const
         ptr = ptr->sig;
     }
     return;
+}
+
+Bolsa Personaje::obtenerBolsa() const
+{
+    return bolsa; 
 }
 
 // Metodos para uso de la bolsa (lista) --------------------------------------
@@ -277,8 +281,6 @@ void Personaje::insertar_ordenado(Objeto &objeto)
     {
         nuevo_obj->sig = bolsa;
         bolsa = nuevo_obj;
-
-        system("pause");
     }
     else
     {
@@ -297,7 +299,6 @@ void Personaje::insertar_ordenado(Objeto &objeto)
             done = true;
 
             cout << endl;
-            system("pause");
         }
         if (!done)
         {
@@ -305,7 +306,6 @@ void Personaje::insertar_ordenado(Objeto &objeto)
             ptr->sig = nuevo_obj;
 
             cout << endl;
-            system("pause");
         }
     }
 }

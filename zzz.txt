@@ -1,0 +1,80 @@
+Aragorn
+humano
+guerrero
+H
+120
+100
+100
+10
+100
+2
+Cota de malla de Mitril
+armadura
+1000
+1
+Espada elfica Narsil
+arma
+1000
+1
+Gandalf
+humano
+mago
+H
+100
+50
+50
+100
+500
+2
+Baston de mago
+artefacto magico
+1500
+1
+Espada elfica Glamdring
+arma
+1000
+1
+Bilbo Bolson
+hobbit
+portador del anillo
+H
+100
+50
+50
+0
+200
+3
+Anillo unico
+artefacto magico
+5000
+1
+Capa elfica
+vestimenta
+700
+1
+Daga elfica Dardo
+arma
+1100
+1
+Sam Sagaz
+hobbit
+companero
+H
+100
+50
+50
+0
+500
+3
+Cacerola
+utensilio
+25
+1
+Especias
+comida
+50
+5
+Pan del camino
+comida
+100
+10
